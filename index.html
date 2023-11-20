@@ -6,6 +6,7 @@
 
     <script>
         async function getCookies() {
+            console.log('getCookies');
             let access = await document.hasStorageAccess();
             if (access) {
                 return document.cookie;
