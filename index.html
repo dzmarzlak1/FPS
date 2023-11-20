@@ -8,6 +8,10 @@
         async function getCookies() {
             console.log('getCookies');
             let access = await document.hasStorageAccess();
+            if (!access) {
+                await document.requestStorageAccess();
+                access = await document.hasStorageAccess();
+            }
             if (access) {
                 return document.cookie;
             }
@@ -16,6 +20,10 @@
 
         async function setCookie(name, value) {
             let access = await document.hasStorageAccess();
+            if (!access) {
+                await document.requestStorageAccess();
+                access = await document.hasStorageAccess();
+            }
             if (access) {
                 document.cookie = `${name}=${value}; SameSite=None; Secure`;
                 return;
